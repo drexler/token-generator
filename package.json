@@ -1,0 +1,25 @@
+{
+  "name": "token-generator",
+  "version": "0.1.0",
+  "description": "Token Generator",
+  "author": "drexler",
+  "engine": {
+    "node": ">=6.0.0"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "jest"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.135.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.44",
+    "serverless-webpack": "^3.1.2",
+    "ts-loader": "^3.0.3",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3",
+    "webpack": "^3.8.1"
+  }
+}
