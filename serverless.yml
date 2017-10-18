@@ -1,4 +1,4 @@
-service: sso-drexler-token
+service: drexler-token-generator
 
 provider:
   name: aws
@@ -6,8 +6,11 @@ provider:
 
 functions:
   createToken:
-    handler: tokens-service.create
-
+    handler: token-service.create
+    events: # endpoint triggering lambda
+      - http:
+          path: /token
+          method: post
 
 plugins:
   - serverless-webpack

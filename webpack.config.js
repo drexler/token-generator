@@ -6,7 +6,7 @@ module.exports = {
   output: {
     libraryTarget: 'commonjs',
     filename: '[name].js',
-    path: path.join(__dirname, '.webpack')
+    path: path.join(__dirname, 'dist')
   },
   target: 'node',
   externals: [ 'aws-sdk' ],
