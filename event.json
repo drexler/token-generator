@@ -1,0 +1,35 @@
+{
+  "resource": "/token",
+  "path": "/token",
+  "httpMethod": "POST",
+  "headers": null,
+  "queryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "path": "/token",
+    "accountId": "12345678912",
+    "resourceId": "tvy6oe",
+    "stage": "test-invoke-stage",
+    "requestId": "test-invoke-request",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": "12345678912",
+      "cognitoIdentityId": null,
+      "caller": "AIDAIEIK2POEBRRPE6XOC",
+      "apiKey": "test-invoke-api-key",
+      "sourceIp": "test-invoke-source-ip",
+      "accessKey": "ASIAIBDZCFNUNRYGXNIA",
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": "arn:aws:iam::12345678912:user/drexler",
+      "userAgent": "Apache-HttpClient/4.5.x (Java/1.8.0_131)",
+      "user": "AIDAIEIK2POEBRRPE6XOC"
+    },
+    "resourcePath": "/token",
+    "httpMethod": "POST",
+    "apiId": "72q6110r8i"
+  },
+  "body": " {\n \"apiKey\": \"ueuodsy\",\n \"apiSecret\": \"nn8374dmngmsmsg67\",\n \"tenant\": \"tokensRus\",\n \"applicationId\": \"jokersInc\",\n \"username\": \"nerdy\",\n \"password\": \"knockknock\",\n \"endpoint\": \"givemeatoken.com\"\r\n}",
+  "isBase64Encoded": false
+}
