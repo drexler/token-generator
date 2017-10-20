@@ -1,5 +1,15 @@
 var path = require('path');
+var fs = require('fs');
 const slsw = require('serverless-webpack');
+
+var nodeModules = {};
+fs.readdirSync('node_modules')
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
+  });
 
 module.exports = {
   entry: slsw.lib.entries,
@@ -9,7 +19,7 @@ module.exports = {
     path: path.join(__dirname, 'dist')
   },
   target: 'node',
-  externals: [ 'aws-sdk' ],
+  externals: nodeModules,
   module: {
     loaders: [
       {
