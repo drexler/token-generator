@@ -6,6 +6,9 @@
         "quotemark": [true,
             "single",
             "avoid-escape"
-        ]
+        ],
+        "object-literal-sort-keys": false,
+        "trailing-comma": false,
+        "max-line-length": false
 	 }
 }
