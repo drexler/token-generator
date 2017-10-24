@@ -64,7 +64,7 @@ export function create(event: any, context: any, callback: any): void {
       statusCode: responseBody.httpStatus,
       body: JSON.stringify(responseBody)
     };
-    callback(null, response)
+    callback(null, response);
   } else {
     getAccessToken((tokenError, tokenResponse) => {
       if (tokenError) {
@@ -78,14 +78,14 @@ export function create(event: any, context: any, callback: any): void {
           statusCode: responseBody.httpStatus,
           body: JSON.stringify(responseBody)
         };
-        callback(null, response)
+        callback(null, response);
       } else {
         response = {
           statusCode: 200,
           body: JSON.stringify({
             token: tokenResponse})
         };
-        callback(null, response)
+        callback(null, response);
       }
     });
   }
