@@ -8,8 +8,7 @@
   },
   "main": "./dist/index.js",
   "scripts": {
-    "build": "webpack",
-    "test": "jest"
+    "build": "webpack"
   },
   "dependencies": {
     "aws-sdk": "^2.135.0",

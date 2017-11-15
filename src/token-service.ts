@@ -12,21 +12,16 @@ let parameters: {
   endpoint: string
 };
 
-function getAccessToken(callback: any): any {
+async function getAccessToken(): Promise<any> {
   const jwt = generateJwt();
 
-  request
+  const response = await request
     .post(`${parameters.endpoint}/${parameters.tenant}/oauth/token/`)
     .set('authorization', `Bearer ${jwt}`)
     .set('Content-Type', 'application/json')
-    .send(`{"grant_type": "password","username": "${parameters.username}","password": "${parameters.password}"}`)
-    .end((error, response) => {
-      if (error) {
-        callback(error);
-      } else {
-        callback(undefined, response.body.access_token);
-      }
-    });
+    .send(`{"grant_type": "password","username": "${parameters.username}","password": "${parameters.password}"}`);
+
+  return response.body.access_token;
 
 }
 
@@ -47,46 +42,45 @@ function uniqueify(): string {
   return uniqueifier().substring(0, 20);
 }
 
-export function create(event: any, context: any, callback: any): void {
+function buildLambdaErrorResponse(statusCode: number, message: string, developerMessage: any): any {
+  return {
+    httpStatus: statusCode,
+    message,
+    developerMessage
+  };
+}
+
+export async function create(event: any, context: any, callback: any) {
   let response: any;
   let responseBody: any;
 
   parameters = JSON.parse(event.body);
   const numberOfProperties = Object.keys(parameters).length;
   if (numberOfProperties !== 7) {
-    responseBody = {
-      httpStatus: 400,
-      code: 10,
-      message: 'Request body cannot be intepreted.',
-      developerMessage: `Expected 7 properties; received ${numberOfProperties}`,
-    };
+    responseBody = buildLambdaErrorResponse(400,
+                    'Request body cannot be intepreted.',
+                    `Expected 7 properties; received ${numberOfProperties}`);
     response = {
       statusCode: responseBody.httpStatus,
       body: JSON.stringify(responseBody)
     };
-    callback(null, response);
+    callback(undefined, response);
   } else {
-    getAccessToken((tokenError, tokenResponse) => {
-      if (tokenError) {
-        responseBody = {
-          httpStatus: 400,
-          code: 10,
-          message: 'Error generating token',
-          developerMessage: tokenError,
-        };
-        response = {
-          statusCode: responseBody.httpStatus,
-          body: JSON.stringify(responseBody)
-        };
-        callback(null, response);
-      } else {
-        response = {
-          statusCode: 200,
-          body: JSON.stringify({
-            token: tokenResponse})
-        };
-        callback(null, response);
-      }
-    });
+    try {
+      const accessToken = await getAccessToken();
+      response = {
+        statusCode: 200,
+        body: JSON.stringify({ token: accessToken })
+      };
+      callback(undefined, response);
+
+    } catch (error) {
+      responseBody = buildLambdaErrorResponse(400, 'Error generating token', error);
+      response = {
+        statusCode: responseBody.httpStatus,
+        body: JSON.stringify(responseBody)
+      };
+      callback(undefined, response);
+    }
   }
 }
