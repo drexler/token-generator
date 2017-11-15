@@ -12,3 +12,4 @@ An [AWS Lambda](https://aws.amazon.com/lambda/)-based token generation using [Se
 - Invoke the function locally: `serverless invoke --local -f createToken`
 - Invoke the function locally with event: `serverless invoke --local -f createToken --path event.json`
 - Bundle and just see the output: `serverless webpack --out dist`
+- Teardown the service: `serverless remove`

@@ -6,7 +6,7 @@ provider:
 
 functions:
   createToken:
-    handler: token-service.create
+    handler: src/token-service.create
     events: # endpoint triggering lambda
       - http:
           path: /token
