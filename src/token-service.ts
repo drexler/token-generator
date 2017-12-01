@@ -50,7 +50,7 @@ function buildLambdaErrorResponse(statusCode: number, message: string, developer
   };
 }
 
-export async function create(event: any, context: any, callback: any) {
+export async function createToken(event: any, context: any, callback: any) {
   let response: any;
   let responseBody: any;
 
