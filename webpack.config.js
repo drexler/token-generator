@@ -13,6 +13,7 @@ fs.readdirSync('node_modules')
 
 module.exports = {
   entry: slsw.lib.entries,
+  devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs',
     filename: '[name].js',

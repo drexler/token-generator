@@ -6,10 +6,16 @@ provider:
 
 functions:
   createToken:
-    handler: src/token-service.create
+    handler: src/token-service.createToken
     events: # endpoint triggering lambda
       - http:
           path: /token
+          method: post
+  createJwt:
+    handler: src/token-service.createJwt
+    events: # endpoint triggering lambda
+      - http:
+          path: /jwt
           method: post
 
 plugins:
