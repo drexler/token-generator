@@ -84,3 +84,27 @@ export async function createToken(event: any, context: any, callback: any) {
     }
   }
 }
+
+export async function createJwt(event: any, context: any, callback: any) {
+  const request = JSON.parse(event.body);
+
+  const claims = {
+    iat: Math.trunc(Date.now() / 1000),
+    iss: request.apiKey,
+    sub: request.applicationHref,
+    callbackUrl: request.callbackUrl,
+    tenantId: request.tenantId,
+    jti: uniqueifier()
+  }
+
+  const jwt = nJwt.create(claims, request.apiSecret).compact();
+
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({
+      jwt
+    })
+  };
+
+  callback(undefined, response);
+}

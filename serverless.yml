@@ -11,6 +11,12 @@ functions:
       - http:
           path: /token
           method: post
+  createJwt:
+    handler: src/token-service.createJwt
+    events: # endpoint triggering lambda
+      - http:
+          path: /jwt
+          method: post
 
 plugins:
   - serverless-webpack
