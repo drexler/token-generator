@@ -8,8 +8,8 @@ An [AWS Lambda](https://aws.amazon.com/lambda/)-based token generation using [Se
 
 ##### Usage
 - Clone the project.
-- Deploy the service: `serverless deploy -v`
-- Invoke the function locally: `serverless invoke --local -f createToken`
-- Invoke the function locally with event: `serverless invoke --local -f createToken --path event.json`
-- Bundle and just see the output: `serverless webpack --out dist`
-- Teardown the service: `serverless remove`
+- Deploy the service: `sls deploy -v`
+- Invoke the function locally: `sls invoke --local -f createToken`
+- Invoke the function locally with event: `sls invoke --local -f createToken --path event.json`
+- Bundle and just see the output: `sls webpack --out dist`
+- Teardown the service: `sls remove`
