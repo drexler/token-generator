@@ -2,8 +2,9 @@ service: drexler-token-generator
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs12.x
   versionFunctions: false
+  stackName: custom-tokenizer
 
 functions:
   createToken:
@@ -18,10 +19,18 @@ functions:
       - http:
           path: /jwt
           method: post
-          cors: true
+          #cors: true
+  testLambaInput:
+    handler: src/token-service.testLambdaInput
+    events: # endpoint triggering lambda
+      - http:
+          path: /test
+          method: ANY
+          #cors: true
 
 plugins:
   - serverless-webpack
+  - serverless-cloudformation-resource-counter
 
 custom:
   webpack: ./webpack.config.js

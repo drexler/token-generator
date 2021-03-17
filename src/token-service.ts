@@ -108,3 +108,24 @@ export async function createJwt(event: any, context: any, callback: any) {
 
   callback(undefined, response);
 }
+
+export async function testLambdaInput(event: any, context: any, callback: any)
+{
+  console.log(`received event: ${JSON.stringify(event)}`);
+  const payload = JSON.parse(event.body);
+
+  const origin = event.headers["origin"];
+
+  const response = {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin" : origin, // Required for CORS support to work
+      "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS 
+    },
+    body: JSON.stringify({
+      received: payload,
+    })
+  };
+
+  callback(undefined, response);
+}
